@@ -26,6 +26,8 @@ const ModalError: FC<PropsWithChildren> = memo(function ModalError({ children })
         flexDirection: "column",
         padding: "20px",
         fontSize: "14px",
+        backgroundColor: "gray.900", // Dark background for contrast
+        borderRadius: "lg",
       }}
     >
       <Center
@@ -33,57 +35,57 @@ const ModalError: FC<PropsWithChildren> = memo(function ModalError({ children })
           width: "80px",
           height: "80px",
           padding: "16px",
-          background: "error.500",
+          background: "red.500", // Use a clear red color for the error icon background
           borderRadius: "xl",
           color: "white",
         }}
       >
-        <AlertCircle width='40px' height='40px' />
+        <AlertCircle width="40px" height="40px" />
       </Center>
 
       <Text
         mt="20px"
-        fontSize={'20px'}
-        sx={{ textAlign: "center", fontWeight: "bold" }}
+        fontSize="20px"
+        sx={{ textAlign: "center", fontWeight: "bold", color: "white" }} // White text for readability
       >
-        {/* {Return the error title by extracting it from the end of the error message} */}
         {error?.message?.split(':')?.pop()?.trim()?.toUpperCase() ?? ''}
       </Text>
-      {/* <Text mt="20px" textAlign='center' sx={{ fontWeight: 400, color: "dark.500" }}>
-        {error.message.length > 100
-          ? truncate(error.message, [25, 50])
-          : error.message}
-      </Text> */}
+      
       <Textarea
         value={error.message}
-        fontSize={'16px'}
-        color='dark.500'
-        backgroundColor={'dark.100'}
-        resize='none'
+        fontSize="16px"
+        color="white" // White text for the error message
+        backgroundColor="gray.800" // Dark background for contrast
+        resize="none"
         mt="20px"
-        pb='10px'
+        pb="10px"
+        borderRadius="md"
       />
+      
       <Flex
-        bgColor={'rgba(255, 160, 70, 0.12)'}
-        p={'12px 20px'}
-        borderRadius='6px'
-        mt='20px'
-        gap={'10px'}
+        bgColor="rgba(255, 160, 70, 0.12)"
+        p="12px 20px"
+        borderRadius="6px"
+        mt="20px"
+        gap="10px"
       >
         <Box>
-          <InfoIcon boxSize={3.5} color='rgba(255, 183, 130, 1)' />
+          <InfoIcon boxSize={3.5} color="rgba(255, 183, 130, 1)" />
         </Box>
-        <Text fontSize={'16px'}>
+        <Text fontSize="16px" color="gray.300"> {/* Light gray text for readability */}
           We apologize for any unclear errors you may encounter. At present there are problems with the foundational chain-level systems that Andromeda runs on top of to appropriately return errors.
-          This is expected to be resolved in an upcoming release of CosmWasm 2.0. You can view <u><a href="https://www.youtube.com/watch?v=VNwoLZZSoYs&t=8119s" target="_blank" rel="noopener noreferrer"> here</a></u> for more details.
+          This is expected to be resolved in an upcoming release of CosmWasm 2.0. You can view <u><a href="https://www.youtube.com/watch?v=VNwoLZZSoYs&t=8119s" target="_blank" rel="noopener noreferrer" style={{ color: "cyan" }}>here</a></u> for more details. {/* Cyan link color for visibility */}
         </Text>
       </Flex>
-      <Flex w="full" justifyContent={'end'}>
+      
+      <Flex w="full" justifyContent="end">
         <Button
           variant="outline"
           sx={{
             fontSize: "16px",
-            padding: "10px 32px"
+            padding: "10px 32px",
+            color: "white", // White text for the button
+            borderColor: "white", // White border for visibility
           }}
           onClick={onReport}
           mt="40px"
@@ -98,12 +100,13 @@ const ModalError: FC<PropsWithChildren> = memo(function ModalError({ children })
             sx={{
               fontSize: "16px",
               padding: "10px 16px",
+              backgroundColor: "cyan.700", // Cyan background for the copy button
+              color: "white", // White text for the button
             }}
             text={error.message}
             mt="40px"
             leftIcon={<Copy />}
-            fontWeight='bold'
-            colorScheme={'primary'}
+            fontWeight="bold"
           >
             Copy
           </CopyButton>

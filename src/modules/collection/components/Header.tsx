@@ -13,16 +13,35 @@ const Header: FC<HeaderProps> = (props) => {
   return (
     <Grid templateColumns="repeat(2,1fr)" gap="4" py="2" data-testid="header">
       <GridItem colSpan={1}>
-        <Flex direction="column" gap="2" align="start" maxW="md" data-testid="header-left">
+        <Flex
+          direction="column"
+          gap="2"
+          align="start"
+          maxW="md"
+          data-testid="header-left"
+        >
           <Text fontSize="2xl" fontWeight="bold" data-testid="collection-name">
             {collection.name}
           </Text>
-          <Text textStyle="light" fontSize="sm" data-testid="collection-creator">
+          <Text
+            textStyle="light"
+            fontSize="sm"
+            data-testid="collection-creator"
+          >
             Created by <b>0x64fe0...fec9</b>
           </Text>
-          <Text fontWeight="light" fontSize="sm" mt="2" data-testid="collection-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, orci sit amet eleifend facilisis,
-             arcu eros gravida massa, id pharetra dui nisi a leo. Integer a tellus elit. Proin quis venenatis magna... <b>Read more</b>
+          <Text
+            fontWeight="light"
+            fontSize="sm"
+            mt="2"
+            data-testid="collection-description"
+          >
+            Support your favorite artist by purchasing a limited edition NFT of
+            their latest audio release. This exclusive digital collectible not
+            only gives you ownership of a unique piece of their music but also
+            directly contributes to their continued creative journey. Secure
+            your spot in the artist&apos;s history and enjoy special perks that come
+            with being a true supporter of their work. <b>Read more</b>
           </Text>
         </Flex>
       </GridItem>

@@ -7,7 +7,7 @@ interface Props {
 const PoweredByLogo: FC<Props> = (props) => {
     const { } = props;
     return (
-        <Link href='https://www.andromedaprotocol.io/' target="_blank">
+        <Link href='https://www.junonetwork.io/' target="_blank">
             <HStack
                 position='fixed'
                 left='2'
@@ -18,7 +18,7 @@ const PoweredByLogo: FC<Props> = (props) => {
                     h='6'
                 />
                 <Text fontSize='sm' color='white'>
-                    Powered by Andromeda
+                    Powered by Juno
                 </Text>
             </HStack>
         </Link>

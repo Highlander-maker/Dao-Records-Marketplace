@@ -36,9 +36,16 @@ const Connected: FC<ConnectedProps> = (props) => {
         <>
           <PopoverTrigger>
             <Button
-              variant="outline"
+              variant="solid"  // Change to solid for consistent appearance
               size="lg"
-              borderColor={isOpen ? "primary.600" : "gray.300"}
+              bg={isOpen ? "cyan.600" : "cyan.700"} // Match Store button color
+              color="white" // Ensure the text is white by default
+              _hover={{
+                bg: "cyan.500", // A lighter cyan color on hover
+                color: "white", // Keep text white on hover
+              }}
+              borderRadius="md" // Add borderRadius if desired
+              transition="background-color 0.3s ease, color 0.3s ease"
             >
               <HStack mr='2'>
                 <Image src={config?.iconUrls?.sm ?? ""} w="5" />
@@ -110,19 +117,6 @@ const Connected: FC<ConnectedProps> = (props) => {
                   Explorer
                 </Button>
               </HStack>
-              {/* <Box
-                border="1px solid"
-                borderColor="gray.300"
-                borderRadius="md"
-                p={2}
-                mb={2}
-              >
-                <VStack spacing={2} align="flex-start">
-                  {TOKENS.map(({ logo, name }) => {
-                    return <HoldingItem key={name} logo={logo} name={name} />;
-                  })}
-                </VStack>
-              </Box> */}
               <Button
                 leftIcon={<LogOutIcon boxSize={4} />}
                 variant="outline"

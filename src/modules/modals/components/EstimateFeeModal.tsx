@@ -46,8 +46,13 @@ const FeeAmount: FC<{ coin: Coin; text: string }> = memo(function FeeAmount({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "10px",
+          padding: "20px",
           position: "relative",
+          bg: "gray.800",
+          color: "white",
+          borderRadius: "md",
+          textAlign: "center"
+
         }}
       >
         <Box>{text}</Box>

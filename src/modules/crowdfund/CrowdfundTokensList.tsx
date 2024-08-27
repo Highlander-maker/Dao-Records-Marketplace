@@ -1,5 +1,6 @@
+// CrowdfundTokensList.tsx
+
 import { useGetCrowdfund } from "@/lib/graphql/hooks/crowdfund";
-import { useGetCw721Tokens } from "@/lib/graphql/hooks/cw721";
 import { SearchIcon } from "@/theme/icons";
 import {
   Box,
@@ -15,6 +16,7 @@ import {
   MenuItem,
   MenuList,
   SimpleGrid,
+  Text
 } from "@chakra-ui/react";
 import { SlidersHorizontal } from "lucide-react";
 import React, { FC, useState } from "react";
@@ -27,38 +29,94 @@ interface CrowdfundTokensListProps {
   contractAddress: string;
 }
 
-const CrowdfundTokensList: FC<CrowdfundTokensListProps> = (props) => {
-  const { collectionId, contractAddress } = props;
+const CrowdfundTokensList: FC<CrowdfundTokensListProps> = ({ collectionId, contractAddress }) => {
   const { data: crowdfund } = useGetCrowdfund(contractAddress);
   const [filterOpen, setFilterOpen] = useState(false);
   const collection = useGetCollection<ICrowdfundCollection>(collectionId);
 
   return (
-    <Box data-testid="crowdfund-tokens-list">
-      <HStack>
+    <Box data-testid="crowdfund-tokens-list" p="8" bg="gray.900" color="white" borderRadius="lg">
+      <HStack spacing="4" mb="8">
         <Button
           onClick={() => setFilterOpen((prev) => !prev)}
           leftIcon={<SlidersHorizontal height={16} />}
-          variant="outline"
+          variant="solid"
+          bg="cyan.700"
+          color="white"
+          _hover={{ bg: "cyan.600" }}
+          _active={{ bg: "cyan.800" }}
+          _focus={{ boxShadow: "outline" }}
           data-testid="filter-button"
+          borderRadius="md"
+          px="4"
+          py="2"
         >
           Filter
         </Button>
-        <InputGroup>
+        <InputGroup w="full">
           <InputLeftElement pointerEvents="none">
-            <SearchIcon width={16} data-testid="search-icon" />
+            <SearchIcon width={16} color="gray.500" data-testid="search-icon" />
           </InputLeftElement>
-          <Input placeholder="Collection, item or user" w="full" data-testid="search-input" />
+          <Input
+            placeholder="Search collection, item, or user"
+            bg="cyan.900"
+            color="white"
+            borderRadius="md"
+            _placeholder={{ color: "gray.300" }}
+            _hover={{ borderColor: "cyan.600" }}
+            _focus={{ borderColor: "cyan.600", boxShadow: "outline" }}
+            data-testid="search-input"
+          />
         </InputGroup>
         <Menu placement="bottom-end">
-          <MenuButton as={Button} variant="outline" minW="max-content" data-testid="sort-menu-button">
+          <MenuButton
+            as={Button}
+            variant="solid"
+            bg="cyan.700"
+            color="white"
+            _hover={{ bg: "cyan.600" }}
+            _active={{ bg: "cyan.800" }}
+            _focus={{ boxShadow: "outline" }}
+            data-testid="sort-menu-button"
+            borderRadius="md"
+            px="10"
+            py="2"
+          >
             Price: low to high
           </MenuButton>
-          <MenuList data-testid="sort-menu-list">
-            <MenuItem data-testid="sort-low-to-high">Price: low to high</MenuItem>
-            <MenuItem data-testid="sort-high-to-low">Price: high to low</MenuItem>
-            <MenuItem data-testid="sort-recently-listed">Recently listed</MenuItem>
-            <MenuItem data-testid="sort-auction-ending-soon">Auction ending soon</MenuItem>
+          <MenuList
+            data-testid="sort-menu-list"
+            bg="gray.700"
+            borderColor="gray.600"
+          >
+            <MenuItem
+              data-testid="sort-low-to-high"
+              bg="gray.700"
+              _hover={{ bg: "gray.600" }}
+            >
+              Price: low to high
+            </MenuItem>
+            <MenuItem
+              data-testid="sort-high-to-low"
+              bg="gray.700"
+              _hover={{ bg: "gray.600" }}
+            >
+              Price: high to low
+            </MenuItem>
+            <MenuItem
+              data-testid="sort-recently-listed"
+              bg="gray.700"
+              _hover={{ bg: "gray.600" }}
+            >
+              Recently listed
+            </MenuItem>
+            <MenuItem
+              data-testid="sort-auction-ending-soon"
+              bg="gray.700"
+              _hover={{ bg: "gray.600" }}
+            >
+              Auction ending soon
+            </MenuItem>
           </MenuList>
         </Menu>
       </HStack>
@@ -69,22 +127,24 @@ const CrowdfundTokensList: FC<CrowdfundTokensListProps> = (props) => {
               w="full"
               maxW="64"
               border="1px"
-              borderColor="gray.300"
+              borderColor="gray.600"
+              bg="gray.800"
               rounded="2xl"
               top="4"
               position="sticky"
               alignSelf="start"
-              p="10"
+              p="6"
               data-testid="filter-container"
             >
-              Filter
+              {/* Add filter options here */}
+              <Text color="white" fontSize="md">Filter Options</Text>
             </Box>
           )}
           <SimpleGrid columns={filterOpen ? 3 : 4} spacing={4} w="full">
             {crowdfund?.availableTokens?.map((tokenId) => (
               <GridItem key={tokenId} data-testid={`token-card-${tokenId}`}>
                 <Cw721TokenCard
-                  contractAddress={collection.cw721}
+                  contractAddress={collection?.cw721 || ""}
                   tokenId={tokenId}
                   collectionId={collectionId}
                 />

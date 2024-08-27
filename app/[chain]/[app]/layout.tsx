@@ -19,6 +19,7 @@ export async function generateMetadata(
     const config = await getConfig(client, params.app);
     return {
         title: config.name,
+        metadataBase: new URL('http://localhost:3000'),
         openGraph: {
             images: ['/logo.png'],
             'title': config.name,

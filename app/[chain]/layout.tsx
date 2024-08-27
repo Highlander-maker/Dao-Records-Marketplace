@@ -5,7 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "Andromeda Embeddable",
+        default: "Dao Records Embeddable",
         template: "%s | Embeddable"
     },
 }

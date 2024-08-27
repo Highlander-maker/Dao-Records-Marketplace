@@ -1,3 +1,4 @@
+
 import { useBuyNowConstruct } from "@/lib/andrjs";
 import useApp from "@/lib/app/hooks/useApp";
 import {
@@ -8,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { coins } from "@cosmjs/proto-signing";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useExecuteModal } from "../hooks";
 import { BuyNowModalProps } from "../types";
 import { Msg } from "@andromedaprotocol/andromeda.js";
@@ -24,13 +25,11 @@ const BuyNowModal: FC<BuyNowModalProps> = (props) => {
     tokenId
   );
 
-
   const { config } = useApp();
   const construct = useBuyNowConstruct();
 
   const DENOM = marketplaceState?.latestSaleState.coin_denom ?? config?.coinDenom ?? "ujunox";
 
-  // Execute place bid directly on auction
   const openExecute = useExecuteModal(marketplaceAddress);
 
   const onSubmit = () => {
@@ -44,17 +43,24 @@ const BuyNowModal: FC<BuyNowModalProps> = (props) => {
 
   return (
     <Box>
-      <Heading size="md" mb="6" fontWeight="bold">
+      <Heading size="md" mb="6" fontWeight="bold" color="cyan.100">
         Purchase
       </Heading>
-      <Text textStyle="light" mb="4">
+      <Text textStyle="light" mb="4" color="gray.300">
         You are about to buy <b>{token?.metadata?.name}</b> which has tokenId <b>{tokenId}</b>.
-
       </Text>
       <Box>
         <FormControl>
-
-          <Button onClick={onSubmit} w="full" mt="6" variant="solid">
+          <Button
+            onClick={onSubmit}
+            w="full"
+            mt="6"
+            variant="solid"
+            bg="cyan.600"  // Set a specific background color
+            color="white"  // Ensure the text is white
+            _hover={{ bg: "cyan.700" }}  // Define a hover state for better UX
+            _active={{ bg: "cyan.800" }}  // Active state styling
+          >
             Buy Now
           </Button>
         </FormControl>
@@ -64,5 +70,3 @@ const BuyNowModal: FC<BuyNowModalProps> = (props) => {
 };
 
 export default BuyNowModal;
-
-

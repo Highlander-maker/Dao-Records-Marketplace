@@ -21,27 +21,38 @@ const Cw721TokenCard: FC<Cw721TokenCardProps> = ({ tokenId, collectionId, contra
   const collection = useGetCollection(collectionId);
 
   return (
-    <CardOutline
-      link={LINKS.cw721Token(collectionId, tokenId)}
-      img={token?.metadata?.image}
-      data-testid="cw721-token-card"
+    <Box
+      borderRadius="md"
+      overflow="hidden"
+      boxShadow="md"
+      _hover={{
+        boxShadow: "xl",
+        transform: "scale(1.05)",
+        transition: "all 0.3s ease-in-out",
+      }}
     >
-      <HStack justifyContent="space-between" mt="3" data-testid="card-stats">
-        <CardStats
-          title={cw721?.contractInfo?.name ?? ""}
-          body={token?.metadata?.name ?? ''}
-          data-testid="card-stats-details"
-        />
-      </HStack>
-      <Box mt="1" data-testid="card-status">
-        {collection?.type === ICollectionType.AUCTION && (
-          <Cw721AuctionState collection={collection} tokenId={tokenId} data-testid="auction-state" />
-        )}
-        {collection?.type === ICollectionType.MARKETPLACE && (
-          <Cw721MarketplaceState collection={collection} tokenId={tokenId} data-testid="marketplace-state" />
-        )}
-      </Box>
-    </CardOutline>
+      <CardOutline
+        link={LINKS.cw721Token(collectionId, tokenId)}
+        img={token?.metadata?.image}
+        data-testid="cw721-token-card"
+      >
+        <HStack justifyContent="space-between" mt="3" data-testid="card-stats">
+          <CardStats
+            title={cw721?.contractInfo?.name ?? ""}
+            body={token?.metadata?.name ?? ''}
+            data-testid="card-stats-details"
+          />
+        </HStack>
+        <Box mt="1" data-testid="card-status">
+          {collection?.type === ICollectionType.AUCTION && (
+            <Cw721AuctionState collection={collection} tokenId={tokenId} data-testid="auction-state" />
+          )}
+          {collection?.type === ICollectionType.MARKETPLACE && (
+            <Cw721MarketplaceState collection={collection} tokenId={tokenId} data-testid="marketplace-state" />
+          )}
+        </Box>
+      </CardOutline>
+    </Box>
   );
 };
 

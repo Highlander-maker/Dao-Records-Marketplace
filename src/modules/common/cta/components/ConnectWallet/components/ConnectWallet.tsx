@@ -1,11 +1,10 @@
 import { useWalletModal } from "@/modules/modals/hooks";
-import { PlusIcon } from "@/theme/icons";
+import { Plus } from "lucide-react";
 import { Button, Icon } from "@chakra-ui/react";
 import React, { FC } from "react";
 import Connected from "./Connected";
 import useAndromedaClient from "@/lib/andrjs/hooks/useAndromedaClient";
 import { useAndromedaStore } from "@/zustand/andromeda";
-import { Plus } from "lucide-react";
 
 interface ConnectWalletProps {}
 
@@ -22,7 +21,13 @@ const ConnectWallet: FC<ConnectWalletProps> = (props) => {
   return (
     <Button
       leftIcon={<Icon as={Plus} boxSize={5} />}
-      colorScheme="purple"
+      bg="#B065C8"  // Same background color as Store button
+      color="white"  // Light gray text color
+      border="2px solid"  // Add a border
+      borderColor="#8A4CA5"  // Cyan border color
+      _hover={{ bg: "#9B5BBA", color: "#7B4192", borderColor: "dark" }}// Lighter background and border on hover
+      _active={{ bg: "#7B4192", color: "white", borderColor: "#5E3170" }}  // Adjust active background and border color
+      _focus={{ boxShadow: "outline" }}
       onClick={open}
       isLoading={isLoading}
       data-testid="connect-wallet-button"

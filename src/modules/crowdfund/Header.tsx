@@ -1,63 +1,61 @@
-import { IBaseCollection, ICrowdfundCollection } from "@/lib/app/types";
+// Header.tsx
+
+import { ICrowdfundCollection } from "@/lib/app/types";
 import { useGetCrowdfund } from "@/lib/graphql/hooks/crowdfund/useGetCrowdfund";
 import { useGetCw721 } from "@/lib/graphql/hooks/cw721";
-import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Text, Link } from "@chakra-ui/react";
 import React, { FC } from "react";
 import CrowdfundGroupInfo from "./CrowdfundGroupInfo";
 
 interface HeaderProps {
-    collection: ICrowdfundCollection;
+  collection: ICrowdfundCollection;
 }
 
-const Header: FC<HeaderProps> = (props) => {
-    const { collection } = props;
-    const { data: crowdfund } = useGetCrowdfund(collection.crowdfund);
-    const { data: cw721 } = useGetCw721(collection.cw721)
+const Header: FC<HeaderProps> = ({ collection }) => {
+  const { data: crowdfund } = useGetCrowdfund(collection.crowdfund);
+  const { data: cw721 } = useGetCw721(collection.cw721);
 
-    return (
-        <Grid templateColumns="repeat(2,1fr)" gap="4" py="2" data-testid="header">
-            <GridItem colSpan={1} data-testid="header-left">
-                <Flex direction="column" gap="2" align="start" maxW="md">
-                    <Text fontSize="2xl" fontWeight="bold" data-testid="collection-name">
-                        {cw721?.contractInfo?.name}
-                    </Text>
-                    <Text textStyle="light" fontSize="sm" data-testid="collection-minter">
-                        Minter - <b>{cw721?.minter}</b>
-                    </Text>
-                    <Text fontWeight="light" fontSize="sm" mt="2" data-testid="collection-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, orci sit amet eleifend facilisis,
-                        arcu eros gravida massa, id pharetra dui nisi a leo. Integer a tellus elit. Proin quis venenatis magna... <b>Read more</b>
-                    </Text>
-                </Flex>
-            </GridItem>
-            <GridItem colSpan={1} data-testid="header-right">
-                <CrowdfundGroupInfo
-                    collection={collection}
-                    collectionName={collection.name}
-                />
-            </GridItem>
-        </Grid>
-    );
-};
-
-interface StatProps {
-    label: string;
-    value: string;
-}
-
-const Stat: FC<StatProps> = (props) => {
-    const { label, value } = props;
-
-    return (
-        <Box data-testid="stat">
-            <Text fontSize="xs" textStyle="light" data-testid="stat-label">
-                {label}
+  return (
+    <Grid templateColumns="repeat(2,1fr)" gap="4" py="2" data-testid="header">
+      <GridItem colSpan={1} data-testid="header-left">
+        <Flex direction="column" gap="2" align="start" maxW="md">
+          {/* Check if cw721 data is loaded before rendering */}
+          {cw721 ? (
+            <>
+              <Text fontSize="2xl" fontWeight="bold" color="cyan.100" data-testid="collection-name">
+                {cw721.contractInfo?.name || "Unnamed Collection"}
+              </Text>
+              <Text textStyle="light" fontSize="sm" color="cyan.100" data-testid="collection-minter">
+                Minter - <b>{cw721.minter || "Unknown"}</b>
+              </Text>
+            </>
+          ) : (
+            <Text fontSize="2xl" fontWeight="bold" color="cyan.100" data-testid="collection-name">
+              Loading...
             </Text>
-            <Text fontWeight="medium" fontSize="md" data-testid="stat-value">
-                {value}
-            </Text>
-        </Box>
-    );
+          )}
+          <Text fontWeight="light" fontSize="sm" mt="2" color="gray.300">
+            Join us in celebrating the incredible talent of our artists by purchasing tickets to our exclusive showcase events. Your support not only grants you access to unforgettable performances but also helps propel the artists forward with the power of blockchain technology.
+            <Link
+              href="https://github.com/Highlander-maker/dao_records"
+              isExternal
+              color="cyan.300"
+              fontWeight="bold"
+              ml="1"
+            >
+              Read more
+            </Link>
+          </Text>
+        </Flex>
+      </GridItem>
+      <GridItem colSpan={1} data-testid="header-right">
+        <CrowdfundGroupInfo
+          collection={collection}
+          collectionName={cw721?.contractInfo?.name || "Unnamed Collection"}
+        />
+      </GridItem>
+    </Grid>
+  );
 };
 
 export default Header;
