@@ -20,7 +20,7 @@ const CONFIG: IConfig = {
         {
             crowdfund:
                 "juno1rvqnx28rlkpcamlvdvyvuqv5tlycdsy8n9xreyt2nyfkc8jzu84qmen57x",
-            cw721: "juno13qrtuw450lreq2mgj3r546hu97rjs085usddzqt56djcs2q75zpqeslxe9",
+            cw721: "juno1alauwm73dyvlntj43d5wts7hgsr5ufcc7srme20sxkz663kjx9qszv6hre",
             name: "Event Tickets",
             type: ICollectionType.CROWDFUND,
             id: "crowdfund",
