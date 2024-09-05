@@ -34,6 +34,10 @@ const CrowdfundTokensList: FC<CrowdfundTokensListProps> = ({ collectionId, contr
   const [filterOpen, setFilterOpen] = useState(false);
   const collection = useGetCollection<ICrowdfundCollection>(collectionId);
 
+   // ADD THESE LOGS
+   console.log("Crowdfund Data:", crowdfund); // Check if crowdfund data is fetched
+   console.log("Available Tokens:", crowdfund?.availableTokens); // Check available tokens
+
   return (
     <Box data-testid="crowdfund-tokens-list" p="8" bg="gray.900" color="white" borderRadius="lg">
       <HStack spacing="4" mb="8">

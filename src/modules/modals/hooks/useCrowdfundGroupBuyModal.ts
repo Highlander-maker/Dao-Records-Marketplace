@@ -16,6 +16,8 @@ import useGlobalModalContext from "./useGlobalModalContext";
 export default function useCrowdfundGroupBuyModal(data: Omit<CrowdfundGroupBuyModalProps, 'modalType'>) {
   const { open } = useGlobalModalContext();
 
+  console.log("CrowdfundGroupBuyModal data:", data); // Add this to debug
+
   return () =>
     open(ModalType.CrowdfundGroupBuy, data);
 }

@@ -8,11 +8,20 @@ export function useGetCrowdfund(
         variables: {
             'ADO_crowdfund_address': adoAddress
         }
-    })
-    console.log(data);
+    });
+    
+    // Enhanced logging to capture error details
+    if (error) {
+        console.error("Error fetching crowdfund data:", error);
+    }
+
+    console.log("Crowdfund Query Variables:", {
+        adoAddress,
+    });
+
     return {
         loading,
         error,
-        data: data?.ADO.crowdfund,
+        data: data?.ADO.crowdfund,  // Only return crowdfund data if available
     };
 }

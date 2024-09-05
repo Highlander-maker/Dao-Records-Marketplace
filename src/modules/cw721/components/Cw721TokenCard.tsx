@@ -20,6 +20,12 @@ const Cw721TokenCard: FC<Cw721TokenCardProps> = ({ tokenId, collectionId, contra
   const { data: token } = useGetCw721Token(contractAddress, tokenId);
   const collection = useGetCollection(collectionId);
 
+  // Add logging to check token metadata
+  console.log('Token Data:', token);
+  console.log('Image URL:', token?.metadata?.image);
+  console.log('Token Metadata:', token?.metadata);
+
+
   return (
     <Box
       borderRadius="md"
